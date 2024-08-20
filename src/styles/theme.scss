@@ -1,0 +1,64 @@
+/* USED ONLY FOR COLORS, everything else goes to variables.scss */
+html {
+    /* LIGHT */
+    --primary-light: rgb(100, 95, 246);
+    --text-1-light: rgb(33, 37, 41);
+    --text-2-light: rgb(73, 80, 87);
+    --text-3-light: rgb(119, 129, 135);
+    --surface-1-light: rgb(246, 250, 254);
+    --surface-2-light: rgb(234, 238, 242);
+    --surface-3-light: rgb(220, 224, 228);
+
+    /* DARK */
+    --primary-dark: rgb(90, 85, 236);
+    --text-1-dark: rgb(242, 244, 250);
+    --text-2-dark: rgb(192, 194, 200);
+    --text-3-dark: rgb(142, 144, 150);
+    --surface-1-dark: rgb(12, 18, 32);
+    --surface-2-dark: rgb(28, 34, 48);
+    --surface-3-dark: rgb(44, 50, 64);
+}
+
+@mixin light-vars {
+    color-scheme: light;
+    --primary: var(--primary-light);
+    --text-1: var(--text-1-light);
+    --text-2: var(--text-2-light);
+    --text-3: var(--text-3-light);
+    --surface-1: var(--surface-1-light);
+    --surface-2: var(--surface-2-light);
+    --surface-3: var(--surface-3-light);
+    --surface-2-transp: var(--surface-2-transp-light);
+    --surface-3-transp: var(--surface-3-transp-light);
+}
+
+@mixin dark-vars {
+    color-scheme: dark;
+    --primary: var(--primary-dark);
+    --text-1: var(--text-1-dark);
+    --text-2: var(--text-2-dark);
+    --text-3: var(--text-3-dark);
+    --surface-1: var(--surface-1-dark);
+    --surface-2: var(--surface-2-dark);
+    --surface-3: var(--surface-3-dark);
+    --surface-2-transp: var(--surface-2-transp-dark);
+    --surface-3-transp: var(--surface-3-transp-dark);
+}
+
+html[data-theme="light"] {
+    @include light-vars;
+}
+html[data-theme="dark"] {
+    @include dark-vars;
+}
+:root {
+    // @include light-vars;
+    @include dark-vars;
+}
+/* In case we implement auto theme
+@media (prefers-color-scheme: dark) {
+    :root {
+        @include dark-vars;
+    }
+}
+*/
