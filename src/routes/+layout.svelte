@@ -1,10 +1,11 @@
 <script lang="ts">
   import "../styles/theme.scss";
   import "../styles/main.scss";
-  import { writable } from "svelte/store";
+  import { derived, readable, readonly, writable } from "svelte/store";
   import { fly, fade } from "svelte/transition";
-  import { type AppState, Theme } from "$lib";
+  import { type AppContext, type AppState, Theme, APP_CONTEXT_KEY } from "$lib";
   import { createTooltip, melt } from "@melt-ui/svelte";
+  import { setContext } from "svelte";
 
   export let data;
 
@@ -17,6 +18,10 @@
     closeDelay: 300,
   });
   const appState = writable<AppState>({ theme: data.theme });
+  const isDarkTheme = derived(
+    appState,
+    ($appState) => $appState.theme === Theme.Dark
+  );
 
   function toggleTheme() {
     appState.update((old) => {
@@ -31,6 +36,12 @@
       };
     });
   }
+
+  setContext<AppContext>(APP_CONTEXT_KEY, {
+    appState: readonly(appState),
+    toggleTheme,
+    isDarkTheme,
+  });
 </script>
 
 <nav class="nav">
