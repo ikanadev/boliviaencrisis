@@ -45,14 +45,14 @@ html {
     --surface-3-transp: var(--surface-3-transp-dark);
 }
 
-html[data-theme="light"] {
-    @include light-vars;
-}
-html[data-theme="dark"] {
-    @include dark-vars;
-}
 :root {
     // @include light-vars;
+    @include dark-vars;
+}
+[data-theme="light"] {
+    @include light-vars;
+}
+[data-theme="dark"] {
     @include dark-vars;
 }
 /* In case we implement auto theme
