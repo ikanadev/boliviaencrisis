@@ -5,19 +5,21 @@ html {
   --text-1-light: rgb(33, 37, 41);
   --text-2-light: rgb(73, 80, 87);
   --text-3-light: rgb(119, 129, 135);
-  --surface-1-light: rgb(246, 250, 254);
-  --surface-2-light: rgb(234, 238, 242);
-  --surface-3-light: rgb(220, 224, 228);
+  --surface-1-light: rgb(244, 244, 254);
+  --surface-2-light: rgb(232, 232, 242);
+  --surface-3-light: rgb(220, 220, 230);
+  --surface-4-light: rgb(208, 208, 218);
   --green-light: rgb(0, 180, 0);
 
-  /* DARK */
+  /* DARK 11,11,14 24, 24, 27 */
   --primary-dark: rgb(90, 85, 236);
   --text-1-dark: rgb(242, 244, 250);
   --text-2-dark: rgb(192, 194, 200);
   --text-3-dark: rgb(142, 144, 150);
-  --surface-1-dark: rgb(12, 18, 32);
-  --surface-2-dark: rgb(28, 34, 48);
-  --surface-3-dark: rgb(44, 50, 64);
+  --surface-1-dark: rgb(12, 12, 20);
+  --surface-2-dark: rgb(26, 26, 34);
+  --surface-3-dark: rgb(40, 40, 48);
+  --surface-4-dark: rgb(54, 54, 62);
   --green-dark: rgb(11, 219, 11);
 }
 
@@ -30,8 +32,7 @@ html {
   --surface-1: var(--surface-1-light);
   --surface-2: var(--surface-2-light);
   --surface-3: var(--surface-3-light);
-  --surface-2-transp: var(--surface-2-transp-light);
-  --surface-3-transp: var(--surface-3-transp-light);
+  --surface-4: var(--surface-4-light);
   --green: var(--green-light);
 }
 
@@ -44,8 +45,7 @@ html {
   --surface-1: var(--surface-1-dark);
   --surface-2: var(--surface-2-dark);
   --surface-3: var(--surface-3-dark);
-  --surface-2-transp: var(--surface-2-transp-dark);
-  --surface-3-transp: var(--surface-3-transp-dark);
+  --surface-4: var(--surface-4-dark);
   --green: var(--green-dark);
 }
 

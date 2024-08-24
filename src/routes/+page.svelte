@@ -10,19 +10,7 @@
 <svelte:head>
   <title>Bolivia en crisis</title>
 </svelte:head>
-<header class="header container">
-  <div role="alert" class="alert">
-    <svg class="alert__icon" fill="none" viewBox="0 0 24 24">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-      />
-    </svg>
-    <span class="alert__text">Este sitio esta en construcción</span>
-  </div>
-</header>
+<header class="header container"></header>
 
 <!-- Sections:
  Intro,
@@ -38,50 +26,84 @@
 <main>
   <section class="container grid">
     <div class="grid-item intro">
-      <h2 class="grid-item__title">
-        Tomando el pulso a la economía boliviana.
-      </h2>
+      <div class="grid-item__container intro__container">
+        <div class="intro__img-cont">
+          <img class="intro__img" src="/img/bolivia.svg" alt="Bolivia" />
+        </div>
+        <h2 class="grid-item__title">
+          Tomando el pulso<br />a la economía<br />boliviana.
+        </h2>
+      </div>
     </div>
     <div class="grid-item usdt">
-      <h2 class="grid-item__title">Dólar paralelo</h2>
-      {#await data.prices}
-        <p class="usdt__price usdt__price--loading">00.00 Bs.</p>
-      {:then prices}
-        <p class="usdt__price">
-          {(prices[0].price / 100).toFixed(2)} Bs.
-        </p>
-      {:catch}
-        <p class="usdt__price" style="color: red;">Error</p>
-      {/await}
-      <p class="usdt__text">Dólar oficial: 6.96 Bs.</p>
+      <div class="grid-item__container usdt__container">
+        <h2 class="grid-item__title">Dólar paralelo</h2>
+        {#await data.prices}
+          <p class="usdt__price usdt__price--loading">00.00 Bs.</p>
+        {:then prices}
+          <p class="usdt__price">
+            {(prices[0].price / 100).toFixed(2)} Bs.
+          </p>
+        {:catch}
+          <p class="usdt__price" style="color: red;">Error</p>
+        {/await}
+        <p class="usdt__text">Dólar oficial: 6.96 Bs.</p>
+      </div>
     </div>
     <div class="grid-item security">
-      <h2 class="grid-item__title">Medidas de seguridad</h2>
-      <p>Aprende a identificar billetes autenticos.</p>
-      <div class="security__img-cont">
-        <img
-          class="security__img"
-          src="/img/100NewLeft.webp"
-          alt="100 Dólares"
-        />
+      <div class="grid-item__container security__container">
+        <h2 class="grid-item__title">Medidas de seguridad</h2>
+        <p>Aprende a identificar billetes autenticos.</p>
+        <div class="security__img-cont">
+          <img
+            class="security__img"
+            src="/img/100NewLeft.webp"
+            alt="100 Dólares"
+          />
+        </div>
       </div>
     </div>
     <div class="grid-item chart">
-      <h2 class="grid-item__title">Precio dolar ultima semana</h2>
+      <div class="grid-item__container chart__container">
+        <h2 class="grid-item__title">Precio dolar ultima semana</h2>
+      </div>
     </div>
     <div class="grid-item help">
-      <h2 class="grid-item__title">Ayuda a esta pagina</h2>
+      <div class="grid-item__container help__container">
+        <h2 class="grid-item__title">Ayuda a esta pagina</h2>
+      </div>
     </div>
     <div class="grid-item banks">
-      <h2 class="grid-item__title">Restricciones bancos</h2>
+      <div class="grid-item__container banks__container">
+        <h2 class="grid-item__title">Restricciones bancos</h2>
+      </div>
     </div>
     <div class="grid-item prices">
-      <h2 class="grid-item__title">Precios productos basicos</h2>
+      <div class="grid-item__container prices__container">
+        <h2 class="grid-item__title">Precios productos basicos</h2>
+      </div>
     </div>
     <div class="grid-item views">
       <h2 class="grid-item__title">Views</h2>
     </div>
   </section>
+  <div class="cover">
+    <div role="alert" class="alert">
+      <svg
+        class="alert__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 28 28"
+      >
+        <path
+          fill="currentColor"
+          d="M16.408 4.172c-1.045-1.896-3.77-1.896-4.815 0L2.35 20.92c-1.011 1.833.314 4.078 2.408 4.078H23.24c2.093 0 3.42-2.245 2.408-4.078zM15 20a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-1.75-3.25v-6.5a.75.75 0 0 1 1.5 0v6.5a.75.75 0 0 1-1.5 0"
+        />
+      </svg>
+      <span class="alert__text">Este sitio esta en construcción</span>
+    </div>
+  </div>
 </main>
 
 <style lang="scss">
@@ -94,60 +116,108 @@
     color: var(--text-2);
   }
 
+  .cover {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.4);
+  }
   .alert {
     background: var(--surface-3);
-    border-radius: $size-1;
-    padding: $size-2 $size-3;
+    border-radius: $size-2;
+    padding: $size-3 $size-4;
     display: flex;
     align-items: center;
     gap: $size-2;
+    font-size: $font-size-lg;
     &__icon {
       width: $size-6;
       height: auto;
-      fill: var(--text-2);
+      color: #ffbf00;
     }
   }
 
   .grid {
     display: grid;
-    grid-template-columns: 3fr 2fr 2fr 3fr;
-    gap: $size-2;
+    grid-template-columns: 1fr;
+    gap: $size-5;
+    font-size: $font-size-lg;
+    font-weight: 300;
     grid-template-areas:
-      "intro usdt  usdt   security"
-      "chart chart chart  security"
-      "chart chart chart  help"
-      "banks banks prices prices"
-      "banks banks prices prices"
-      "views views prices prices";
+      "intro"
+      "usdt"
+      "security"
+      "chart"
+      "help"
+      "banks"
+      "prices"
+      "views";
+  }
+  @media (min-width: $md-breakpoint) {
+    .grid {
+      grid-template-columns: 7fr 3fr 3fr 7fr;
+      grid-template-areas:
+        "intro usdt  usdt   security"
+        "chart chart chart  security"
+        "chart chart chart  help"
+        "chart chart chart  help"
+        "banks banks prices prices"
+        "banks banks prices prices"
+        "views views prices prices";
+    }
   }
 
   .grid-item {
-    background: var(--surface-2);
     color: var(--text-2);
     border-radius: $size-2;
-    padding: $size-3 $size-5;
+    padding: 1px;
     overflow: hidden;
+    background-image: linear-gradient(var(--surface-4), var(--surface-1) 25%);
+    &__container {
+      background: var(--surface-2);
+      border-radius: $size-2;
+      padding: $size-3 $size-5;
+      height: 100%;
+    }
     &__title {
-      font-weight: 700;
+      font-weight: 600;
       font-size: $font-size-lg;
       margin-bottom: $size-2;
     }
   }
   .intro {
     grid-area: intro;
-    display: grid;
-    place-items: center;
-    padding-left: $size-7;
-    padding-right: $size-7;
+    &__container {
+      display: grid;
+      grid-template-columns: 4fr 7fr;
+    }
     h2 {
-      text-align: center;
+      font-size: $font-size-xl;
+      font-weight: 400;
+      text-align: right;
+    }
+    &__img-cont {
+      position: relative;
+      min-height: 120px;
+    }
+    &__img {
+      position: absolute;
+      max-width: fit-content;
+      right: -100px;
+      top: 0px;
+      width: auto;
+      height: 170%;
     }
   }
   .usdt {
     grid-area: usdt;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     &__price {
       color: var(--green);
       font-size: $font-size-3xl;
@@ -171,13 +241,15 @@
     }
     &__img {
       position: absolute;
-      top: 50px;
-      left: 50px;
+      top: 40px;
+      left: 80px;
+      transform: rotate(8deg);
       transition: all 300ms ease;
-      &:hover {
-        top: 30px;
-        left: 30px;
-      }
+    }
+    &:hover &__img {
+      top: 20px;
+      left: 40px;
+      transform: rotate(0deg);
     }
   }
   .chart {

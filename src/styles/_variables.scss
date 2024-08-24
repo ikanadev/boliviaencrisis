@@ -1,6 +1,6 @@
 $md-breakpoint: 769px;
 
-$content-width: 1024px;
+$content-width: 75rem;
 $content-padding: clamp(1rem, 2vw, 1.5rem);
 
 /* spacing */
@@ -41,7 +41,7 @@ $font-size-md: 1rem;
 $font-size-lg: 1.25rem;
 $font-size-xl: 1.5rem;
 $font-size-2xl: 2rem;
-$font-size-3xl: 3.5rem;
+$font-size-3xl: 3rem;
 
 /* mixins */
 @mixin content-container {
