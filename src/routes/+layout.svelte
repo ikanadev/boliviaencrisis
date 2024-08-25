@@ -45,7 +45,7 @@
 </script>
 
 <nav class="nav">
-  <p>Bolivia en crisis</p>
+  <a href="/">Bolivia en crisis</a>
   <div class="nav__spacer" />
   {#if $open}
     <div class="tooltip" use:melt={$content} transition:fade>
