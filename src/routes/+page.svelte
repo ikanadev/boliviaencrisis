@@ -50,7 +50,7 @@
         <p class="usdt__text">Dólar oficial: 6.96 Bs.</p>
       </div>
     </div>
-    <div class="grid-item security">
+    <a href="/billetes-falsos" class="grid-item security">
       <div class="grid-item__container security__container">
         <h2 class="grid-item__title">Medidas de seguridad</h2>
         <p>Aprende a identificar billetes autenticos.</p>
@@ -62,7 +62,7 @@
           />
         </div>
       </div>
-    </div>
+    </a>
     <div class="grid-item chart">
       <div class="grid-item__container chart__container">
         <h2 class="grid-item__title">Precio dolar ultima semana</h2>
@@ -108,9 +108,7 @@
 
 <style lang="scss">
   .container {
-    max-width: $content-width;
-    padding: $content-padding;
-    margin: auto;
+    @include content-container;
   }
   .header {
     color: var(--text-2);
@@ -120,6 +118,7 @@
     position: fixed;
     inset: 0;
     display: grid;
+    display: none;
     place-items: center;
     backdrop-filter: blur(4px);
     background: rgba(0, 0, 0, 0.4);
@@ -157,15 +156,15 @@
   }
   @media (min-width: $md-breakpoint) {
     .grid {
-      grid-template-columns: 7fr 3fr 3fr 7fr;
+      grid-template-columns: 7fr 3fr 6fr 3fr 7fr;
       grid-template-areas:
-        "intro usdt  usdt   security"
-        "chart chart chart  security"
-        "chart chart chart  help"
-        "chart chart chart  help"
-        "banks banks prices prices"
-        "banks banks prices prices"
-        "views views prices prices";
+        "intro intro usdt usdt   security"
+        "intro intro .     .     security"
+        "banks chart chart chart security"
+        "banks chart chart chart help"
+        "banks . . prices prices"
+        ". . . prices prices"
+        ". views views prices prices";
     }
   }
 
@@ -200,7 +199,7 @@
     }
     &__img-cont {
       position: relative;
-      min-height: 120px;
+      min-height: 180px;
     }
     &__img {
       position: absolute;
@@ -208,7 +207,7 @@
       right: -100px;
       top: 0px;
       width: auto;
-      height: 170%;
+      height: 110%;
     }
   }
   .usdt {
@@ -235,6 +234,7 @@
     }
   }
   .security {
+    text-decoration: none;
     grid-area: security;
     &__img-cont {
       position: relative;

@@ -8,7 +8,7 @@ type PriceItem = {
     deletedAt: string | null;
 }
 
-export async function load({fetch}) {
+export async function load({ fetch }) {
     async function loadPrices() {
         const resp = await fetch('https://ikanaapi.fly.dev/crisis/prices/ustd');
         const prices = (await resp.json()) as PriceItem[];
