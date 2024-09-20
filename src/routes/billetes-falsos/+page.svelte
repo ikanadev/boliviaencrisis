@@ -1,14 +1,34 @@
 <script lang="ts">
 	import { CardCont } from "$lib/components";
+	const features = [
+		{ x: "40%", y: "40%" },
+		{ x: "20%", y: "40%" },
+		{ x: "86%", y: "40%" },
+		{ x: "52%", y: "52%" },
+		{ x: "36%", y: "74%" },
+	];
 </script>
 
 <main>
 	<h1>Medidas de seguridad Dólar</h1>
 
+	<div class="bill">
+		<img
+			class="bill__img"
+			src="/img/security/100hundred.webp"
+			alt="Superficie de alto relieve"
+		/>
+		{#each features as feature, i}
+			<div class="bill__feature" style="top: {feature.y}; left: {feature.x};">
+				{i + 1}
+			</div>
+		{/each}
+	</div>
 	<div class="container">
 		<CardCont>
 			<div class="security">
 				<div class="security__img-cont">
+					<div class="security__feature">1</div>
 					<img
 						class="security__img"
 						src="/img/security/100SusSurface.webp"
@@ -27,6 +47,7 @@
 		<CardCont>
 			<div class="security">
 				<div class="security__img-cont">
+					<div class="security__feature">2</div>
 					<img
 						class="security__img"
 						src="/img/security/100SusThread.webp"
@@ -46,6 +67,7 @@
 		<CardCont>
 			<div class="security">
 				<div class="security__img-cont">
+					<div class="security__feature">3</div>
 					<img
 						class="security__img"
 						src="/img/security/100watermark.webp"
@@ -64,6 +86,7 @@
 		<CardCont>
 			<div class="security">
 				<div class="security__img-cont">
+					<div class="security__feature">4</div>
 					<img
 						class="security__img"
 						src="/img/security/100Ribbon.webp"
@@ -84,6 +107,7 @@
 		<CardCont>
 			<div class="security">
 				<div class="security__img-cont">
+					<div class="security__feature">5</div>
 					<img
 						class="security__img"
 						src="/img/security/100micro.webp"
@@ -105,20 +129,55 @@
 </main>
 
 <style lang="scss">
+	@mixin feature_item {
+		position: absolute;
+		border-radius: 50%;
+		line-height: 1;
+		display: grid;
+		place-items: center;
+		background-color: var(--primary);
+		color: rgba(255, 255, 255, 0.8);
+		font-weight: 700;
+		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 1);
+	}
 	main {
 		@include content-container;
+	}
+	.bill {
+		max-width: 800px;
+		margin: 0 auto;
+		position: relative;
+		&__img {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+		}
+		&__feature {
+			@include feature_item();
+			width: 1.5rem;
+			height: 1.5rem;
+			font-size: 1rem;
+		}
 	}
 	.container {
 		display: grid;
 		margin-top: $size-8;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(1, 1fr);
 		gap: $size-4;
-		justify-content: center;
 	}
 	.security {
 		&__img-cont {
 			height: 250px;
 			width: 100%;
+			position: relative;
+		}
+		&__feature {
+			@include feature_item();
+			top: $size-3;
+			left: $size-3;
+			width: 2.5rem;
+			height: 2.5rem;
+			font-size: 1.5rem;
 		}
 		&__img {
 			width: 100%;
@@ -136,6 +195,30 @@
 		&__text {
 			color: var(--text-2);
 			font-size: $font-size-md;
+		}
+	}
+	@media (width >= $sm-breakpoint) {
+		.container {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		.bill {
+			&__feature {
+				width: 2rem;
+				height: 2rem;
+				font-size: 1.5rem;
+			}
+		}
+	}
+	@media (width >= $md-breakpoint) {
+		.container {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		.bill {
+			&__feature {
+				width: 2.5rem;
+				height: 2.5rem;
+				font-size: 1.5rem;
+			}
 		}
 	}
 </style>
