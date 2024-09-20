@@ -5,7 +5,7 @@
 		{ x: "20%", y: "40%" },
 		{ x: "86%", y: "40%" },
 		{ x: "52%", y: "52%" },
-		{ x: "36%", y: "74%" },
+		{ x: "35%", y: "78%" },
 	];
 </script>
 
@@ -164,6 +164,8 @@
 		margin-top: $size-8;
 		grid-template-columns: repeat(1, 1fr);
 		gap: $size-4;
+		margin-top: $size-10;
+		margin-bottom: $size-10;
 	}
 	.security {
 		&__img-cont {
