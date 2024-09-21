@@ -10,7 +10,7 @@ type PriceItem = {
 
 export async function load({ fetch }) {
     async function loadPrices() {
-        const resp = await fetch('https://ikanaapi.fly.dev/crisis/prices/ustd');
+        const resp = await fetch('https://ikanaapi.fly.dev/crisis/prices/usdt');
         const prices = (await resp.json()) as PriceItem[];
         return prices;
     }
