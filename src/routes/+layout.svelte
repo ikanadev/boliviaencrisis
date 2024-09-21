@@ -1,17 +1,18 @@
 <script lang="ts">
 	import "../styles/theme.scss";
 	import "../styles/main.scss";
-	import { afterNavigate, beforeNavigate } from "$app/navigation";
-	import { derived, readable, readonly, writable } from "svelte/store";
+	import { afterNavigate } from "$app/navigation";
+	import { derived, readonly, writable } from "svelte/store";
 	import { fly, fade } from "svelte/transition";
 	import { type AppContext, type AppState, Theme, APP_CONTEXT_KEY } from "$lib";
 	import { createTooltip, melt } from "@melt-ui/svelte";
-	import { onMount, setContext } from "svelte";
+	import { setContext } from "svelte";
 	import { getCurrentBrowserFingerPrint } from "@rajesh896/broprint.js";
+	import { API_URL } from "$lib/constants";
 
 	export let data;
 
-	let browserId: string;
+	let userId: string;
 
 	const {
 		elements: { trigger, content, arrow },
@@ -48,9 +49,15 @@
 	});
 
 	async function trackNavigation(url: string) {
-		browserId = browserId ?? (await getCurrentBrowserFingerPrint());
-		const payload = { browserId, url };
-		console.log("Tracking", browserId, url);
+		userId = userId ?? (await getCurrentBrowserFingerPrint());
+		const payload = { userId: userId.toString(), url, app: "bolivia_en_crisis" };
+		fetch(`${API_URL}/common/page_view`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(payload),
+		});
 	}
 
 	afterNavigate(async (data) => {
