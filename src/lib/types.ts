@@ -15,3 +15,12 @@ export type AppContext = {
     isDarkTheme: Readable<boolean>;
     toggleTheme: VoidFunction,
 }
+
+export type UsdtItem = {
+	id: string;
+	price: number;
+	createdAt: string;
+	updatedAt: string;
+	archivedAt: string | null;
+	deletedAt: string | null;
+}

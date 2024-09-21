@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { USDTChart } from "$lib/components";
 	import { APP_CONTEXT_KEY, type AppContext } from "$lib/types.js";
-	import { getContext } from "svelte";
+	import { getContext, onMount } from "svelte";
 
 	export let data;
 
@@ -38,14 +39,14 @@
 		<div class="grid-item usdt">
 			<div class="grid-item__container usdt__container">
 				<h2 class="grid-item__title">Dólar paralelo</h2>
-				{#await data.prices}
+				{#await data.indexData}
 					<p class="usdt__price usdt__price--loading">00.00 Bs.</p>
-				{:then prices}
+				{:then indexData}
 					<p class="usdt__price">
-						{(prices[0].price / 100).toFixed(2)} Bs.
+						{(indexData.usdtPrice / 100).toFixed(2)} Bs.
 					</p>
 				{:catch}
-					<p class="usdt__price" style="color: red;">Error cargando precio</p>
+					<p class="usdt__price usdt__price--error">Error cargando precio</p>
 				{/await}
 				<p class="usdt__text">Dólar oficial: 6.96 Bs.</p>
 			</div>
@@ -66,6 +67,15 @@
 		<div class="grid-item chart">
 			<div class="grid-item__container chart__container">
 				<h2 class="grid-item__title">Precio dolar ultima semana</h2>
+				{#await data.indexData}
+					<p class="">Loading...</p>
+				{:then indexData}
+					<div class="chart__container">
+						<USDTChart items={indexData.lastUsdtRecords} />
+					</div>
+				{:catch}
+					<p class="usdt__price usdt__price--error">Error cargando precio</p>
+				{/await}
 			</div>
 		</div>
 		<div class="grid-item help">
@@ -117,8 +127,8 @@
 	.cover {
 		position: fixed;
 		inset: 0;
-		display: grid;
 		display: none;
+		display: grid;
 		place-items: center;
 		backdrop-filter: blur(4px);
 		background: rgba(0, 0, 0, 0.4);
@@ -251,6 +261,10 @@
 				color: var(--text-3);
 				animation: 1s ease-in-out 0s infinite alternate pulse;
 			}
+			&--error {
+				color: red;
+				font-size: $font-size-lg;
+			}
 		}
 		&__text {
 			font-size: $font-size-md;
@@ -280,7 +294,6 @@
 	}
 	.chart {
 		grid-area: chart;
-		height: 240px;
 	}
 	.help {
 		grid-area: help;

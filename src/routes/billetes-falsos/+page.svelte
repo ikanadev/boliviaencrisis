@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { CardCont } from "$lib/components";
+	import { onMount } from "svelte";
+
 	const features = [
 		{ x: "40%", y: "40%" },
 		{ x: "20%", y: "40%" },
@@ -7,6 +9,10 @@
 		{ x: "52%", y: "52%" },
 		{ x: "35%", y: "78%" },
 	];
+
+	onMount(() => {
+		console.log("Dollar mounted");
+	});
 </script>
 
 <main>
