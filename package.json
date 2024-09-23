@@ -16,6 +16,7 @@
 		"@sveltejs/adapter-cloudflare": "^4.7.2",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/d3-array": "^3.2.1",
 		"@types/d3-scale": "^4.0.8",
 		"@types/d3-shape": "^3.1.6",
 		"autoprefixer": "^10.4.20",
@@ -28,6 +29,7 @@
 	"type": "module",
 	"dependencies": {
 		"@rajesh896/broprint.js": "^2.1.1",
+		"d3-array": "^3.2.4",
 		"d3-scale": "^4.0.2",
 		"d3-shape": "^3.2.0",
 		"sass": "^1.77.8"
