@@ -66,15 +66,22 @@
 		</a>
 		<div class="grid-item chart">
 			<div class="grid-item__container chart__container">
-				<h2 class="grid-item__title">Precio dolar ultima semana</h2>
+				<h2 class="grid-item__title">Precio dólar, últimos registros</h2>
 				{#await data.indexData}
-					<p class="">Loading...</p>
+					<svg viewBox="0 0 1000 400">
+						<rect
+							x="0"
+							y="0"
+							width="1000"
+							height="400"
+							rx="20"
+							fill="var(--surface-1)"
+						/>
+					</svg>
 				{:then indexData}
-					<div class="chart__container">
-						<USDTChart items={indexData.lastUsdtRecords} />
-					</div>
+					<USDTChart items={indexData.lastUsdtRecords} />
 				{:catch}
-					<p class="usdt__price usdt__price--error">Error cargando precio</p>
+					<p class="error">Error cargando precio</p>
 				{/await}
 			</div>
 		</div>
@@ -122,6 +129,10 @@
 	}
 	.header {
 		color: var(--text-2);
+	}
+	.error {
+		color: red;
+		font-size: $font-size-lg;
 	}
 
 	.cover {
