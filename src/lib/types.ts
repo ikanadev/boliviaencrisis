@@ -16,6 +16,13 @@ export type AppContext = {
     toggleTheme: VoidFunction,
 }
 
+export type BankLimitItem = {
+	name: string;
+	url: string;
+	limit: number;
+	period: string;
+}
+
 export type UsdtItem = {
 	id: string;
 	price: number;
