@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CardCont } from "$lib/components";
+	import CardCont from "./CardCont.svelte";
 	import { onMount } from "svelte";
 
 	const features = [

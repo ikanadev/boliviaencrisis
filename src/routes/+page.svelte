@@ -1,12 +1,54 @@
 <script lang="ts">
-	import { USDTChart } from "$lib/components";
+	import USDTChart from "./USDTChart.svelte";
+	import type { BankLimitItem } from "$lib/types";
 	import { APP_CONTEXT_KEY, type AppContext } from "$lib/types.js";
-	import { bankLimits } from "$lib/utils/bankLimits";
-	import { getContext, onMount } from "svelte";
+	import { getContext } from "svelte";
 
 	export let data;
 
 	const { isDarkTheme } = getContext<AppContext>(APP_CONTEXT_KEY);
+
+	export const bankLimits: BankLimitItem[] = [
+		{ name: "BCP", url: "/img/banks/bcp.svg", limit: 30, period: "Semanal" },
+		{ name: "Bisa", url: "/img/banks/bisa.png", limit: 100, period: "Mensual" },
+		{ name: "BNB", url: "/img/banks/bnb.png", limit: 50, period: "Semanal" },
+		{
+			name: "Banco Económico",
+			url: "/img/banks/eco.svg",
+			limit: 35,
+			period: "Mensual",
+		},
+		{
+			name: "Banco Fie",
+			url: "/img/banks/fie.svg",
+			limit: 50,
+			period: "Mensual",
+		},
+		{
+			name: "Banco Ganadero",
+			url: "/img/banks/ganadero.webp",
+			limit: 75,
+			period: "Mensual",
+		},
+		{
+			name: "Banco Mercantil Santa Cruz",
+			url: "/img/banks/msc.svg",
+			limit: 125,
+			period: "Mensual",
+		},
+		{
+			name: "Banco Sol",
+			url: "/img/banks/sol.png",
+			limit: 100,
+			period: "Mensual",
+		},
+		{
+			name: "Banco Unión",
+			url: "/img/banks/union.png",
+			limit: 50,
+			period: "Quincenal",
+		},
+	];
 </script>
 
 <svelte:head>
@@ -333,8 +375,9 @@
 			font-size: $font-size-md;
 		}
 		&__title {
-			font-weight: 500;
+			font-weight: 600;
 			font-size: $font-size-md;
+			line-height: 1;
 		}
 		&__img {
 			width: auto;
