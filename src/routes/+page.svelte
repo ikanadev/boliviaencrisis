@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { USDTChart } from "$lib/components";
 	import { APP_CONTEXT_KEY, type AppContext } from "$lib/types.js";
+	import { bankLimits } from "$lib/utils/bankLimits";
 	import { getContext, onMount } from "svelte";
 
 	export let data;
@@ -68,12 +69,12 @@
 			<div class="grid-item__container chart__container">
 				<h2 class="grid-item__title">Precio dólar, últimos registros</h2>
 				{#await data.indexData}
-					<svg viewBox="0 0 1000 400">
+					<svg viewBox="0 0 1000 500">
 						<rect
 							x="0"
 							y="0"
 							width="1000"
-							height="400"
+							height="500"
 							rx="20"
 							fill="var(--surface-1)"
 						/>
@@ -92,7 +93,18 @@
 		</div>
 		<div class="grid-item banks">
 			<div class="grid-item__container banks__container">
-				<h2 class="grid-item__title">Restricciones bancos</h2>
+				<h2 class="grid-item__title">Compras por Internet</h2>
+				<div class="banks__grid">
+					<h3 class="banks__title">Banco</h3>
+					<h3 class="banks__title">Límite</h3>
+					{#each bankLimits as bankLimit}
+						<img src={bankLimit.url} alt={bankLimit.name} class="banks__img" />
+						<div>
+							<p class="banks__amount">{bankLimit.limit} $us</p>
+							<p class="banks__period">{bankLimit.period}</p>
+						</div>
+					{/each}
+				</div>
 			</div>
 		</div>
 		<div class="grid-item prices">
@@ -138,8 +150,8 @@
 	.cover {
 		position: fixed;
 		inset: 0;
-		display: none;
 		display: grid;
+		display: none;
 		place-items: center;
 		backdrop-filter: blur(4px);
 		background: rgba(0, 0, 0, 0.4);
@@ -312,7 +324,33 @@
 	}
 	.banks {
 		grid-area: banks;
-		height: 300px;
+		&__grid {
+			display: grid;
+			grid-template-columns: 4fr 4fr;
+			gap: $size-2 $size-3;
+			margin-top: $size-3;
+			align-items: center;
+			font-size: $font-size-md;
+		}
+		&__title {
+			font-weight: 500;
+			font-size: $font-size-md;
+		}
+		&__img {
+			width: auto;
+			height: 45px;
+			object-fit: contain;
+			justify-self: center;
+		}
+		&__period {
+			font-weight: 300;
+			line-height: 1.2;
+		}
+		&__amount {
+			font-weight: 700;
+			color: var(--green);
+			line-height: 1.2;
+		}
 	}
 	.prices {
 		grid-area: prices;
