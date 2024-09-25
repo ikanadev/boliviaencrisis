@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { UsdtItem } from "$lib/types";
-	import { format } from "$lib/utils/date_utils";
+	import { format } from "$lib/utils/dateUtils";
 	import { scaleLinear, scalePoint } from "d3-scale";
 	import { extent } from "d3-array";
 	import { line } from "d3-shape";
@@ -8,8 +8,8 @@
 	export let items: UsdtItem[] = [];
 
 	const width = 1000;
-	const height = 400;
-	const margin = { top: 20, right: 30, bottom: 65, left: 130 };
+	const height = 500;
+	const margin = { top: 20, right: 30, bottom: 75, left: 130 };
 
 	let tooltipData: UsdtItem | null = null;
 	let tooltipX = 0;
@@ -85,7 +85,7 @@
 		<path
 			fill="none"
 			stroke="var(--primary)"
-			stroke-width="1.5"
+			stroke-width="2.5"
 			d={linePath(items)}
 		/>
 		{#each items as item}
@@ -122,7 +122,7 @@
 	{#each yScale.ticks(6) as tick}
 		<text
 			text-anchor="end"
-			x={margin.left}
+			x={margin.left - 8}
 			y={yScale(tick)}
 			dominant-baseline="middle"
 		>
@@ -132,7 +132,7 @@
 	{#each xDomain as xData}
 		<text
 			x={xScale(xData)}
-			y={height - margin.bottom + 8}
+			y={height - margin.bottom + 10}
 			text-anchor="middle"
 			dominant-baseline="hanging"
 		>
@@ -140,7 +140,7 @@
 		</text>
 		<text
 			x={xScale(xData)}
-			y={height - margin.bottom + 40}
+			y={height - margin.bottom + 45}
 			text-anchor="middle"
 			dominant-baseline="hanging"
 		>
@@ -155,8 +155,7 @@
 		height: auto;
 		text {
 			fill: var(--text-1);
-			font-family: monospace;
-			font-size: $font-size-xl;
+			font-size: 1.75rem;
 		}
 	}
 	.price_tooltip {
