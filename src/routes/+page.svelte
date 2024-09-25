@@ -1,7 +1,7 @@
 <script lang="ts">
 	import USDTChart from "./USDTChart.svelte";
-	import type { BankLimitItem } from "$lib/types";
-	import { APP_CONTEXT_KEY, type AppContext } from "$lib/types.js";
+	import type { BankLimitItem, AppContext, } from "$lib/types";
+	import { APP_CONTEXT_KEY } from "$lib/types";
 	import { getContext } from "svelte";
 
 	export let data;
@@ -192,8 +192,8 @@
 	.cover {
 		position: fixed;
 		inset: 0;
-		display: grid;
 		display: none;
+		display: grid;
 		place-items: center;
 		backdrop-filter: blur(4px);
 		background: rgba(0, 0, 0, 0.4);
@@ -388,6 +388,7 @@
 		&__period {
 			font-weight: 300;
 			line-height: 1.2;
+			font-size: $font-size-sm;
 		}
 		&__amount {
 			font-weight: 700;
