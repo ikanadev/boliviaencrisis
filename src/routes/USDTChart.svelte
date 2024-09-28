@@ -98,12 +98,6 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<circle
-				on:click={(e) => {
-					const circleRect = e.currentTarget.getBoundingClientRect();
-					tooltipX = circleRect.left + circleRect.width / 2 + 5;
-					tooltipY = circleRect.top - circleRect.height / 2 + 5;
-					tooltipData = Boolean(tooltipData) ? null : item;
-				}}
 				on:mouseenter={(e) => {
 					const circleRect = e.currentTarget.getBoundingClientRect();
 					tooltipX = circleRect.left + circleRect.width / 2 + 5;
@@ -113,7 +107,7 @@
 				on:mouseleave={() => (tooltipData = null)}
 				cx={xScale(item.createdAt)}
 				cy={yScale(item.price)}
-				r="50"
+				r="65"
 				fill="steelblue"
 				opacity="0"
 			/>
