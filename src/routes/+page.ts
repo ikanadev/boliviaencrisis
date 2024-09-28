@@ -2,7 +2,9 @@ import { API_URL } from "$lib/constants";
 import type { UsdtItem } from "$lib/types";
 
 type IndexData = {
-	usdtPrice: number
+	usdtPrice: number;
+	usdtPriceLastWeek: number;
+	usdtPriceLastMonth: number;
 	lastUsdtRecords: UsdtItem[];
 }
 
