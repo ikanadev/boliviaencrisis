@@ -1,6 +1,6 @@
 <script lang="ts">
 	import USDTChart from "./USDTChart.svelte";
-	import type { BankLimitItem, AppContext, } from "$lib/types";
+	import type { BankLimitItem, AppContext } from "$lib/types";
 	import { APP_CONTEXT_KEY } from "$lib/types";
 	import { getContext } from "svelte";
 
@@ -91,6 +91,28 @@
 				{:catch}
 					<p class="usdt__price usdt__price--error">Error cargando precio</p>
 				{/await}
+				<div class="usdt__past-prices-cont">
+					<p class="usdt__text">Anterior semana</p>
+					<p class="usdt__text">Anterior mes</p>
+					{#await data.indexData}
+						<p class="usdt__past-price usdt__past-price--loading">00.00 Bs.</p>
+					{:then indexData}
+						<p class="usdt__past-price">
+							{(indexData.usdtPriceLastWeek / 100).toFixed(2)} Bs.
+						</p>
+					{:catch}
+						<p class="usdt__price usdt__past-price--error">Error</p>
+					{/await}
+					{#await data.indexData}
+						<p class="usdt__past-price usdt__past-price--loading">00.00 Bs.</p>
+					{:then indexData}
+						<p class="usdt__past-price">
+							{(indexData.usdtPriceLastMonth / 100).toFixed(2)} Bs.
+						</p>
+					{:catch}
+						<p class="usdt__price usdt__past-price--error">Error</p>
+					{/await}
+				</div>
 				<p class="usdt__text">Dólar oficial: 6.96 Bs.</p>
 			</div>
 		</div>
@@ -322,6 +344,28 @@
 			font-size: $font-size-3xl;
 			font-weight: 800;
 			font-variant-numeric: tabular-nums;
+			text-align: center;
+			&--loading {
+				color: var(--text-3);
+				animation: 1s ease-in-out 0s infinite alternate pulse;
+			}
+			&--error {
+				color: red;
+				font-size: $font-size-lg;
+			}
+		}
+		&__past-prices-cont {
+			display: grid;
+			gap: 0 $size-1;
+			grid-template-columns: 1fr 1fr;
+			justify-items: center;
+		}
+		&__past-price {
+			color: var(--text-2);
+			font-size: $font-size-xl;
+			font-weight: 800;
+			font-variant-numeric: tabular-nums;
+			text-align: center;
 			&--loading {
 				color: var(--text-3);
 				animation: 1s ease-in-out 0s infinite alternate pulse;
@@ -334,7 +378,8 @@
 		&__text {
 			font-size: $font-size-md;
 			color: var(--text-3);
-			margin-top: $size-4;
+			margin-top: $size-3;
+			text-align: center;
 		}
 	}
 	.security {
@@ -368,10 +413,11 @@
 		grid-area: banks;
 		&__grid {
 			display: grid;
-			grid-template-columns: 4fr 4fr;
+			grid-template-columns: 4fr 3fr;
 			gap: $size-2 $size-3;
 			margin-top: $size-3;
 			align-items: center;
+			justify-items: center;
 			font-size: $font-size-md;
 		}
 		&__title {
@@ -381,19 +427,20 @@
 		}
 		&__img {
 			width: auto;
-			height: 45px;
+			height: 40px;
 			object-fit: contain;
-			justify-self: center;
 		}
 		&__period {
 			font-weight: 300;
 			line-height: 1.2;
 			font-size: $font-size-sm;
+			text-align: center;
 		}
 		&__amount {
 			font-weight: 700;
 			color: var(--green);
 			line-height: 1.2;
+			text-align: center;
 		}
 	}
 	.prices {
