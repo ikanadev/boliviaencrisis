@@ -1,12 +1,16 @@
 <script lang="ts">
+	import { type AnyMeltElement, emptyMeltElement, melt } from "@melt-ui/svelte";
+
 	export let onClick: VoidFunction;
 	export let type: "button" | "submit" | "reset" = "button";
 	export let size: "sm" | "md" | "lg" = "md";
+	export let element: AnyMeltElement = emptyMeltElement as AnyMeltElement;
 </script>
 
 <button
 	on:click={onClick}
 	{type}
+	use:melt={$element}
 	class="button"
 	class:button--small={size === "sm"}
 	class:button--medium={size === "md"}
@@ -26,11 +30,14 @@
 		font-size: $font-size-sm;
 		border-radius: $size-1;
 		padding: $size-1 $size-2;
-		transition: background 0.2s ease-in-out;
-		opacity: 0.9;
+		filter: brightness(95%);
+		transition:
+			filter 0.2s ease-in-out,
+			transform 0.2s ease-in-out;
+		opacity: 0.95;
 		font-weight: 600;
 		&:hover {
-			opacity: 1;
+			filter: brightness(110%);
 		}
 		&--small {
 			padding: $size-1 $size-2;
@@ -41,7 +48,7 @@
 			font-size: $font-size-md;
 		}
 		&--large {
-			padding: $size-1 $size-4;
+			padding: $size-2 $size-4;
 			font-size: $font-size-lg;
 		}
 	}
