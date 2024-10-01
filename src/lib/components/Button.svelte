@@ -27,9 +27,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: $size-1;
-		font-size: $font-size-sm;
 		border-radius: $size-1;
-		padding: $size-1 $size-2;
 		filter: brightness(95%);
 		transition:
 			filter 0.2s ease-in-out,
