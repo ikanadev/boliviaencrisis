@@ -1,16 +1,16 @@
 <script lang="ts">
 	export let onClick: VoidFunction;
 	export let type: "button" | "submit" | "reset" = "button";
-	export let size: "small" | "medium" | "large" = "medium";
+	export let size: "sm" | "md" | "lg" = "md";
 </script>
 
 <button
 	on:click={onClick}
 	{type}
 	class="button"
-	class:button--small={size === "small"}
-	class:button--medium={size === "medium"}
-	class:button--large={size === "large"}
+	class:button--small={size === "sm"}
+	class:button--medium={size === "md"}
+	class:button--large={size === "lg"}
 >
 	<slot />
 </button>
