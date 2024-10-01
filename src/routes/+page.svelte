@@ -1,5 +1,6 @@
 <script lang="ts">
 	import USDTChart from "./USDTChart.svelte";
+	import Banks from "./Banks.svelte";
 	import type { BankLimitItem, AppContext } from "$lib/types";
 	import { APP_CONTEXT_KEY } from "$lib/types";
 	import { getContext } from "svelte";
@@ -8,47 +9,6 @@
 
 	const { isDarkTheme } = getContext<AppContext>(APP_CONTEXT_KEY);
 
-	export const bankLimits: BankLimitItem[] = [
-		{ name: "BCP", url: "/img/banks/bcp.svg", limit: 30, period: "Semanal" },
-		{ name: "Bisa", url: "/img/banks/bisa.png", limit: 100, period: "Mensual" },
-		{ name: "BNB", url: "/img/banks/bnb.png", limit: 50, period: "Semanal" },
-		{
-			name: "Banco Económico",
-			url: "/img/banks/eco.svg",
-			limit: 35,
-			period: "Mensual",
-		},
-		{
-			name: "Banco Fie",
-			url: "/img/banks/fie.svg",
-			limit: 50,
-			period: "Mensual",
-		},
-		{
-			name: "Banco Ganadero",
-			url: "/img/banks/ganadero.webp",
-			limit: 75,
-			period: "Mensual",
-		},
-		{
-			name: "Banco Mercantil Santa Cruz",
-			url: "/img/banks/msc.svg",
-			limit: 125,
-			period: "Mensual",
-		},
-		{
-			name: "Banco Sol",
-			url: "/img/banks/sol.png",
-			limit: 100,
-			period: "Mensual",
-		},
-		{
-			name: "Banco Unión",
-			url: "/img/banks/union.png",
-			limit: 50,
-			period: "Quincenal",
-		},
-	];
 </script>
 
 <svelte:head>
@@ -156,19 +116,9 @@
 			</div>
 		</div>
 		<div class="grid-item banks">
-			<div class="grid-item__container banks__container">
+			<div class="grid-item__container">
 				<h2 class="grid-item__title">Compras por Internet</h2>
-				<div class="banks__grid">
-					<h3 class="banks__title">Banco</h3>
-					<h3 class="banks__title">Límite</h3>
-					{#each bankLimits as bankLimit}
-						<img src={bankLimit.url} alt={bankLimit.name} class="banks__img" />
-						<div>
-							<p class="banks__amount">{bankLimit.limit} $us</p>
-							<p class="banks__period">{bankLimit.period}</p>
-						</div>
-					{/each}
-				</div>
+				<Banks />
 			</div>
 		</div>
 		<div class="grid-item prices">
@@ -214,8 +164,8 @@
 	.cover {
 		position: fixed;
 		inset: 0;
-		display: none;
 		display: grid;
+		display: none;
 		place-items: center;
 		backdrop-filter: blur(4px);
 		background: rgba(0, 0, 0, 0.4);
@@ -411,37 +361,6 @@
 	}
 	.banks {
 		grid-area: banks;
-		&__grid {
-			display: grid;
-			grid-template-columns: 4fr 3fr;
-			gap: $size-2 $size-3;
-			margin-top: $size-3;
-			align-items: center;
-			justify-items: center;
-			font-size: $font-size-md;
-		}
-		&__title {
-			font-weight: 600;
-			font-size: $font-size-md;
-			line-height: 1;
-		}
-		&__img {
-			width: auto;
-			height: 40px;
-			object-fit: contain;
-		}
-		&__period {
-			font-weight: 300;
-			line-height: 1.2;
-			font-size: $font-size-sm;
-			text-align: center;
-		}
-		&__amount {
-			font-weight: 700;
-			color: var(--green);
-			line-height: 1.2;
-			text-align: center;
-		}
 	}
 	.prices {
 		grid-area: prices;
