@@ -7,6 +7,7 @@ export enum Theme {
 
 export type AppState = {
     theme: Theme;
+		userId: string;
 }
 
 export const APP_CONTEXT_KEY = 'appContext';
