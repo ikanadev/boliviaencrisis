@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type AnyMeltElement, emptyMeltElement, melt } from "@melt-ui/svelte";
 
-	export let onClick: VoidFunction;
+	export let onClick: VoidFunction = () => {};
 	export let type: "button" | "submit" | "reset" = "button";
 	export let size: "sm" | "md" | "lg" = "md";
 	export let element: AnyMeltElement = emptyMeltElement as AnyMeltElement;
@@ -26,13 +26,13 @@
 		display: grid;
 		place-items: center;
 		border-radius: 50%;
-		filter: brightness(95%);
+		filter: brightness(98%);
 		transition:
 			filter 0.2s ease-in-out,
 			transform 0.2s ease-in-out;
 		font-weight: 600;
 		&:hover {
-			filter: brightness(105%);
+			filter: brightness(102%);
 		}
 		&--small {
 			padding: $size-2;
