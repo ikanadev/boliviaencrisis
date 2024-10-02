@@ -8,7 +8,6 @@
 	export let data;
 
 	const { isDarkTheme } = getContext<AppContext>(APP_CONTEXT_KEY);
-
 </script>
 
 <svelte:head>

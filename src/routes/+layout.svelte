@@ -23,7 +23,7 @@
 		openDelay: 350,
 		closeDelay: 300,
 	});
-	const appState = writable<AppState>({ theme: data.theme });
+	const appState = writable<AppState>({ theme: data.theme, userId: "" });
 	const isDarkTheme = derived(
 		appState,
 		($appState) => $appState.theme === Theme.Dark,
@@ -38,6 +38,7 @@
 				htmlEl.dataset.theme = newTheme.toString();
 			}
 			return {
+				...old,
 				theme: newTheme,
 			};
 		});
@@ -50,9 +51,12 @@
 	});
 
 	async function trackNavigation(url: string) {
-		userId = userId ?? (await getCurrentBrowserFingerPrint());
+		if (!$appState.userId) {
+			const id = await getCurrentBrowserFingerPrint();
+			appState.update((old) => ({ ...old, userId: id.toString() }));
+		}
 		const payload = {
-			userId: userId.toString(),
+			userId: $appState.userId,
 			url,
 			app: "bolivia_en_crisis",
 		};
