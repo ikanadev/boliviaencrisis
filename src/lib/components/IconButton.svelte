@@ -4,6 +4,7 @@
 	export let onClick: VoidFunction = () => {};
 	export let type: "button" | "submit" | "reset" = "button";
 	export let size: "sm" | "md" | "lg" = "md";
+	export let disabled = false;
 	export let element: AnyMeltElement = emptyMeltElement as AnyMeltElement;
 </script>
 
@@ -15,6 +16,8 @@
 	class:button--small={size === "sm"}
 	class:button--medium={size === "md"}
 	class:button--large={size === "lg"}
+	class:button--disabled={disabled}
+	disabled={disabled}
 >
 	<slot />
 </button>
@@ -45,6 +48,10 @@
 		&--large {
 			padding: $size-3;
 			font-size: $font-size-lg;
+		}
+		&--disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
 		}
 	}
 </style>
