@@ -9,11 +9,9 @@
 	import { createTooltip, melt } from "@melt-ui/svelte";
 	import { setContext } from "svelte";
 	import { getCurrentBrowserFingerPrint } from "@rajesh896/broprint.js";
-	import { API_URL } from "$lib/constants";
+	import { API_URL, APP_NAME } from "$lib/constants";
 
 	export let data;
-
-	let userId: string;
 
 	const {
 		elements: { trigger, content, arrow },
@@ -58,7 +56,7 @@
 		const payload = {
 			userId: $appState.userId,
 			url,
-			app: "bolivia_en_crisis",
+			app: APP_NAME,
 		};
 		fetch(`${API_URL}/common/page_view`, {
 			method: "POST",
