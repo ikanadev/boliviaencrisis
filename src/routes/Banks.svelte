@@ -4,13 +4,15 @@
 	import IconButton from "$lib/components/IconButton.svelte";
 	import type { BankLimitItem, AppContext } from "$lib/types";
 	import { APP_CONTEXT_KEY } from "$lib/types";
-	import { enhance } from "$app/forms";
+	import { enhance, applyAction } from "$app/forms";
 	import { fade, fly } from "svelte/transition";
 	import { getContext } from "svelte";
 
 	let textArea: HTMLTextAreaElement;
+	let isBankSuggestionLoading = false;
+
 	const { appState } = getContext<AppContext>(APP_CONTEXT_KEY);
-	$: console.log($appState.userId);
+
 	const {
 		elements: {
 			trigger,
@@ -106,7 +108,15 @@
 					class="modal__form"
 					method="POST"
 					action="?/bank_limit"
-					use:enhance
+					use:enhance={({ cancel }) => {
+						if (isBankSuggestionLoading) return cancel();
+						isBankSuggestionLoading = true;
+						return async ({ result }) => {
+							isBankSuggestionLoading = false;
+							$open = false;
+							await applyAction(result);
+						};
+					}}
 				>
 					<input type="hidden" name="user_id" value={$appState.userId} />
 					<label for="suggestion_text" class="modal__label" use:melt={$root}>
@@ -117,6 +127,7 @@
 						name="suggestion_text"
 						placeholder="Ej. Banco Bisa nuevo límite de 50$us por mes."
 						class="modal__textarea"
+						required
 						bind:this={textArea}
 					/>
 					<Button --bg="var(--primary)" --color="var(--text-1)" type="submit">
