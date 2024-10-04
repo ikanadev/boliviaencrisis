@@ -163,8 +163,8 @@
 	.cover {
 		position: fixed;
 		inset: 0;
-		display: grid;
 		display: none;
+		display: grid;
 		place-items: center;
 		backdrop-filter: blur(4px);
 		background: rgba(0, 0, 0, 0.4);

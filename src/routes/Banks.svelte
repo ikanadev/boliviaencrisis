@@ -24,7 +24,7 @@
 			close,
 		},
 		states: { open },
-	} = createDialog({ defaultOpen: true, openFocus: () => textArea });
+	} = createDialog({ openFocus: () => textArea });
 	const {
 		elements: { root },
 	} = createLabel();
@@ -130,7 +130,12 @@
 						required
 						bind:this={textArea}
 					/>
-					<Button --bg="var(--primary)" --color="var(--text-1)" type="submit">
+					<Button
+						--bg="var(--primary)"
+						--color="var(--text-1-dark)"
+						type="submit"
+						disabled={isBankSuggestionLoading}
+					>
 						Enviar
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
