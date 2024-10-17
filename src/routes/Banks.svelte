@@ -32,7 +32,7 @@
 	const bankLimits: BankLimitItem[] = [
 		{ name: "BCP", url: "/img/banks/bcp.svg", limit: 30, period: "Semanal" },
 		{ name: "Bisa", url: "/img/banks/bisa.png", limit: 100, period: "Mensual" },
-		{ name: "BNB", url: "/img/banks/bnb.png", limit: 50, period: "Semanal" },
+		{ name: "BNB", url: "/img/banks/bnb.png", limit: 35, period: "Semanal" },
 		{
 			name: "Banco Económico",
 			url: "/img/banks/eco.svg",
@@ -48,13 +48,13 @@
 		{
 			name: "Banco Ganadero",
 			url: "/img/banks/ganadero.webp",
-			limit: 75,
+			limit: 50,
 			period: "Mensual",
 		},
 		{
 			name: "Banco Mercantil Santa Cruz",
 			url: "/img/banks/msc.svg",
-			limit: 125,
+			limit: 100,
 			period: "Mensual",
 		},
 		{
