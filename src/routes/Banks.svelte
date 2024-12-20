@@ -30,7 +30,7 @@
 	} = createLabel();
 
 	const bankLimits: BankLimitItem[] = [
-		{ name: "BCP", url: "/img/banks/bcp.svg", limit: 30, period: "Semanal" },
+		{ name: "BCP", url: "/img/banks/bcp.svg", limit: 30, period: "Mensual" },
 		{ name: "Bisa", url: "/img/banks/bisa.png", limit: 100, period: "Mensual" },
 		{ name: "BNB", url: "/img/banks/bnb.png", limit: 35, period: "Semanal" },
 		{
@@ -67,7 +67,7 @@
 			name: "Banco Unión",
 			url: "/img/banks/union.png",
 			limit: 50,
-			period: "Quincenal",
+			period: "Mensual",
 		},
 	];
 </script>

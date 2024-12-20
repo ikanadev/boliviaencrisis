@@ -1,11 +1,12 @@
 import { API_URL } from "$lib/constants";
-import type { UsdtItem } from "$lib/types";
+import type { UsdtItem, EcoNew } from "$lib/types";
 
 type IndexData = {
 	usdtPrice: number;
 	usdtPriceLastWeek: number;
 	usdtPriceLastMonth: number;
 	lastUsdtRecords: UsdtItem[];
+	ecoNews: EcoNew[];
 }
 
 export async function load({ fetch }) {

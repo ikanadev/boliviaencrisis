@@ -1,7 +1,8 @@
 <script lang="ts">
 	import USDTChart from "./USDTChart.svelte";
 	import Banks from "./Banks.svelte";
-	import type { BankLimitItem, AppContext } from "$lib/types";
+	import USDTPrice from "./USDTPrice.svelte";
+	import type { AppContext } from "$lib/types";
 	import { APP_CONTEXT_KEY } from "$lib/types";
 	import { getContext } from "svelte";
 
@@ -39,40 +40,14 @@
 			</div>
 		</div>
 		<div class="grid-item usdt">
-			<div class="grid-item__container usdt__container">
-				<h2 class="grid-item__title">Dólar paralelo</h2>
-				{#await data.indexData}
-					<p class="usdt__price usdt__price--loading">00.00 Bs.</p>
-				{:then indexData}
-					<p class="usdt__price">
-						{(indexData.usdtPrice / 100).toFixed(2)} Bs.
-					</p>
-				{:catch}
-					<p class="usdt__price usdt__price--error">Error cargando precio</p>
-				{/await}
-				<div class="usdt__past-prices-cont">
-					<p class="usdt__text">Anterior semana</p>
-					<p class="usdt__text">Anterior mes</p>
-					{#await data.indexData}
-						<p class="usdt__past-price usdt__past-price--loading">00.00 Bs.</p>
-					{:then indexData}
-						<p class="usdt__past-price">
-							{(indexData.usdtPriceLastWeek / 100).toFixed(2)} Bs.
-						</p>
-					{:catch}
-						<p class="usdt__price usdt__past-price--error">Error</p>
-					{/await}
-					{#await data.indexData}
-						<p class="usdt__past-price usdt__past-price--loading">00.00 Bs.</p>
-					{:then indexData}
-						<p class="usdt__past-price">
-							{(indexData.usdtPriceLastMonth / 100).toFixed(2)} Bs.
-						</p>
-					{:catch}
-						<p class="usdt__price usdt__past-price--error">Error</p>
-					{/await}
-				</div>
-				<p class="usdt__text">Dólar oficial: 6.96 Bs.</p>
+			<div class="grid-item__container">
+				<USDTPrice indexData={data.indexData} />
+			</div>
+		</div>
+		<div class="grid-item banks">
+			<div class="grid-item__container">
+				<h2 class="grid-item__title">Compras por Internet</h2>
+				<Banks />
 			</div>
 		</div>
 		<a href="/billetes-falsos" class="grid-item security">
@@ -109,24 +84,20 @@
 				{/await}
 			</div>
 		</div>
-		<div class="grid-item help">
-			<div class="grid-item__container help__container">
-				<h2 class="grid-item__title">Ayuda a esta pagina</h2>
-			</div>
-		</div>
-		<div class="grid-item banks">
-			<div class="grid-item__container">
-				<h2 class="grid-item__title">Compras por Internet</h2>
-				<Banks />
-			</div>
-		</div>
 		<div class="grid-item prices">
 			<div class="grid-item__container prices__container">
 				<h2 class="grid-item__title">Precios productos basicos</h2>
 			</div>
 		</div>
-		<div class="grid-item views">
-			<h2 class="grid-item__title">Views</h2>
+		<div class="grid-item news">
+			<div class="grid-item__container news__container">
+				<h2 class="grid-item__title">Latest News</h2>
+			</div>
+		</div>
+		<div class="grid-item help">
+			<div class="grid-item__container help__container">
+				<h2 class="grid-item__title">Ayuda a esta pagina</h2>
+			</div>
 		</div>
 	</section>
 	<div class="cover">
@@ -163,8 +134,8 @@
 	.cover {
 		position: fixed;
 		inset: 0;
-		display: none;
 		display: grid;
+		display: none;
 		place-items: center;
 		backdrop-filter: blur(4px);
 		background: rgba(0, 0, 0, 0.4);
@@ -198,7 +169,7 @@
 			"help"
 			"banks"
 			"prices"
-			"views";
+			"news";
 	}
 	@media (width >= $sm-breakpoint) {
 		.grid {
@@ -210,7 +181,7 @@
 				"help help"
 				"banks banks"
 				"prices prices"
-				"views views";
+				"news news";
 		}
 	}
 	@media (width >= $md-breakpoint) {
@@ -221,21 +192,18 @@
 				"intro security"
 				"help security"
 				"banks chart"
-				"banks views"
+				"banks news"
 				"prices prices";
 		}
 	}
 	@media (width >= $lg-breakpoint) {
 		.grid {
-			grid-template-columns: 7fr 3fr 6fr 3fr 7fr;
+			grid-template-columns: 7fr 4fr 5fr 4fr 7fr;
 			grid-template-areas:
-				"intro intro usdt usdt   security"
-				"intro intro .     .     security"
-				"banks chart chart chart security"
-				"banks chart chart chart help"
-				"banks . . prices prices"
-				". . . prices prices"
-				". views views prices prices";
+				"intro intro usdt usdt banks"
+				"security chart chart chart banks"
+				"news news news prices prices"
+				"help help help help help";
 		}
 	}
 
@@ -283,53 +251,6 @@
 	}
 	.usdt {
 		grid-area: usdt;
-		&__container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-		&__price {
-			color: var(--green);
-			font-size: $font-size-3xl;
-			font-weight: 800;
-			font-variant-numeric: tabular-nums;
-			text-align: center;
-			&--loading {
-				color: var(--text-3);
-				animation: 1s ease-in-out 0s infinite alternate pulse;
-			}
-			&--error {
-				color: red;
-				font-size: $font-size-lg;
-			}
-		}
-		&__past-prices-cont {
-			display: grid;
-			gap: 0 $size-1;
-			grid-template-columns: 1fr 1fr;
-			justify-items: center;
-		}
-		&__past-price {
-			color: var(--text-2);
-			font-size: $font-size-xl;
-			font-weight: 800;
-			font-variant-numeric: tabular-nums;
-			text-align: center;
-			&--loading {
-				color: var(--text-3);
-				animation: 1s ease-in-out 0s infinite alternate pulse;
-			}
-			&--error {
-				color: red;
-				font-size: $font-size-lg;
-			}
-		}
-		&__text {
-			font-size: $font-size-md;
-			color: var(--text-3);
-			margin-top: $size-3;
-			text-align: center;
-		}
 	}
 	.security {
 		text-decoration: none;
@@ -356,7 +277,7 @@
 	}
 	.help {
 		grid-area: help;
-		min-height: 200px;
+		min-height: 80px;
 	}
 	.banks {
 		grid-area: banks;
@@ -364,8 +285,8 @@
 	.prices {
 		grid-area: prices;
 	}
-	.views {
-		grid-area: views;
+	.news {
+		grid-area: news;
 	}
 	@keyframes pulse {
 		0% {
